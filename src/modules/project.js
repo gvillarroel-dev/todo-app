@@ -36,7 +36,9 @@ export class Project {
 		}
 
 		if (this.todos.some((t) => t.id === todo.id)) {
-			throw new Error(`Todo with id ${todo.id} already exists in this project`);
+			throw new Error(
+				`Todo with id ${todo.id} already exists in this project`,
+			);
 		}
 
 		this.todos.push(todo);
@@ -66,5 +68,28 @@ export class Project {
 
 	getAllTodos() {
 		return [...this.todos];
+	}
+
+    updateTodo(todoId, newData) {
+        const todo = this.getTodo(todoId);
+
+        if (!todo) {
+            throw new Error(`Todo with id ${todoId} not found`);
+        }
+
+        if (todo.editTodo && typeof  todo.editTodo === "function") {
+            todo.editTodo(newData);
+            return true;
+        }
+
+        return false;
+    }
+
+	editProject(newData) {
+		if (newData.name && typeof newData.name === "string" && newData.name.trim()) {
+			this.name = newData.name.trim();
+            return true;
+		}
+        return false;
 	}
 }
