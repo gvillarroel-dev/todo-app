@@ -192,4 +192,25 @@ export const loadState = (state) => {
 	activeProjectId = state.activeProjectId;
 };
 
-// ============================= STATISTICS - GLOBAL =============================
+// ============================= STATISTICS - GLOBAL (dashboard) =============================
+export const getGlobalStats = () => {
+	const totalProjects = projects.length;
+	let totalTodos = 0;
+	let completedTodos = 0;
+	let pendingTodos = 0;
+
+	projects.forEach((project) => {
+		const todos = project.getAllTodos();
+
+		totalTodos += todos.length;
+		completedTodos += todos.filter((todo) => todo.isComplete).length;
+		pendingTodos += todos.filter((todo) => !todo.isComplete).length;
+	});
+
+	return {
+		totalProjects,
+		totalTodos,
+		completedTodos,
+		pendingTodos,
+	};
+};
