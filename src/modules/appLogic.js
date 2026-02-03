@@ -91,3 +91,60 @@ export const getActiveProject = () => {
 export const getActiveProjectId = () => {
 	return activeProjectId;
 };
+
+// ============================= TODO'S MANAGER =============================
+export const createTodo = (projectId, todoData) => {
+	const project = findProjectById(projectId);
+	if (!project) {
+		throw new Error(`Project with id ${projectId} not found`);
+	}
+
+	const { title, description, priority, dueDate, notes } = todoData;
+	const todo = new Todo(title, description, priority, dueDate, notes);
+
+	project.addTodo(todo);
+	return todo;
+};
+
+export const deleteTodo = (projectId, todoId) => {
+	const project = findProjectById(projectId);
+	if (!project) {
+		throw new Error(`Project with id ${projectId} not found`);
+	}
+
+	return project.removeTodo(todoId);
+};
+
+export const updateTodo = (projectId, todoId, newData) => {
+	const project = findProjectById(projectId);
+	if (!project) {
+		throw new Error(`Project not found`);
+	}
+
+	project.updateTodo(todoId, newData);
+	return project.getTodo(todoId);
+};
+
+export const toggleTodoComplete = (projectId, todoId) => {
+	const project = findProjectById(projectId);
+	if (!project) {
+		throw new Error(`Project with id ${projectId} not found`);
+	}
+
+	const todo = project.getTodo(todoId);
+	if (!todo) {
+		throw new Error(`Todo with id ${todoId} not found`);
+	}
+
+	todo.toggleComplete();
+	return todo;
+};
+
+export const getTodo = (projectId, todoId) => {
+	const project = findProjectById(projectId);
+	if (!project) {
+		return null;
+	}
+
+	return project.getTodo(todoId);
+};
