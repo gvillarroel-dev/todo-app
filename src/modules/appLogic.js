@@ -148,3 +148,48 @@ export const getTodo = (projectId, todoId) => {
 
 	return project.getTodo(todoId);
 };
+
+// ============================= Utilities?? =============================
+export const getState = () => {
+	return {
+		projects: projects.map((project) => ({
+			id: project.id,
+			name: project.name,
+			todos: project.getAllTodos(),
+			createdAt: project.createdAt,
+		})),
+		activeProjectId,
+	};
+};
+
+export const loadState = (state) => {
+	if (!state || !state.projects) {
+		return;
+	}
+
+	projects = state.projects.map((projectData) => {
+		const project = new Project(projectData.name);
+		project.id = projectData.id;
+		project.createdAt = new Date(projectData.createdAt);
+
+		projectData.todos.forEach((todoData) => {
+			const todo = new Todo(
+				todoData.title,
+				todoData.description,
+				todoData.priority,
+				todoData.dueDate,
+				todoData.notes,
+			);
+			todo.id = todoData.id;
+			todo.isComplete = todoData.isComplete;
+			todo.createdAt = new Date(todoData.createdAt);
+
+			project.addTodo(todo);
+		});
+		return project;
+	});
+
+	activeProjectId = state.activeProjectId;
+};
+
+// ============================= STATISTICS - GLOBAL =============================
