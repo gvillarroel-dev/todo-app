@@ -72,3 +72,22 @@ export const updateProject = (projectId, newData) => {
 	project.editProject(newData);
 	return project;
 };
+
+// ============================= ACTIVE PROJECT MANAGER =============================
+export const setActiveProject = (projectId) => {
+	const project = findProjectById(projectId);
+	if (!project) {
+		throw new Error(`Project with id ${projectId} not found`);
+	}
+
+	activeProjectId = projectId;
+	return project;
+};
+
+export const getActiveProject = () => {
+	return findProjectById(activeProjectId);
+};
+
+export const getActiveProjectId = () => {
+	return activeProjectId;
+};
