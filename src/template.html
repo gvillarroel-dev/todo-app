@@ -3,7 +3,86 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>To Do App</title>
+		<meta name="description" content="A modern task management app" />
+		<meta name="author" content="Villarroel Giuliana" />
+		<title>Tasky+ | Task Management</title>
 	</head>
-	<body></body>
+	<body>
+		<header class="header">
+			<div class="header-logo">
+				Tasky<span class="highlight-logo">+</span>
+			</div>
+
+			<nav class="header-menu" id="main-nav">
+				<div class="menu-section">
+					<h3 class="menu-title">
+						Overview <span class="menu-title-icon">⟪</span>
+					</h3>
+					<div class="menu-items">
+						<button class="menu-btn active" data-page="dashboard">
+							<span class="icon">📊</span>
+							<span class="text">Dashboard</span>
+						</button>
+						<button class="menu-btn" data-page="projects">
+							<span class="icon">📁</span>
+							<span class="text">Projects</span>
+						</button>
+					</div>
+				</div>
+
+				<div class="menu-section">
+					<h3 class="menu-title">
+						My Pages <span class="menu-title-icon">⟪</span>
+					</h3>
+					<div class="menu-items">
+						<button class="menu-btn" data-page="tasks">
+							<span class="icon">✓</span>
+							<span class="text">Tasks</span>
+						</button>
+						<button class="menu-btn" data-page="notes">
+							<span class="icon">📝</span>
+							<span class="text">Notes</span>
+						</button>
+						<button class="menu-btn" data-page="calendar">
+							<span class="icon">📅</span>
+							<span class="text">Calendar</span>
+						</button>
+					</div>
+				</div>
+			</nav>
+
+			<div class="header-actions">
+				<button
+					class="btn-new-task"
+					id="btn-new-task"
+					title="Create new task">
+					<span class="icon">+</span>
+					<span class="text">New Project</span>
+				</button>
+			</div>
+		</header>
+
+		<main class="content" id="app">
+			<!-- content rendered here! hehehe -->
+		</main>
+
+		<footer class="footer">
+			<p class="footer-text">
+				Coded and Designed by
+				<a
+					href="https://github.com/gvillarroel-dev"
+					target="_blank"
+					rel="noopener noreferrer"
+					>Villarroel Giuliana</a
+				>
+				| A project from
+				<a
+					href="https://www.theodinproject.com"
+					target="_blank"
+					rel="noopener noreferrer"
+					>The Odin Project</a
+				>
+			</p>
+		</footer>
+	</body>
 </html>
