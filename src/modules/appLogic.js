@@ -214,3 +214,40 @@ export const getGlobalStats = () => {
 		pendingTodos,
 	};
 };
+
+// ============================= STATISTICS - PROJECTS =============================
+export const getProjectStats = (projectId) => {
+	const project = findProjectById(projectId);
+	if (!project) {
+		throw new Error("Project not found");
+	}
+
+	const todos = project.getAllTodos();
+	const totalTodos = todos.length;
+	const completedTodos = todos.filter((todo) => todo.isComplete).length;
+	const pendingTodos = todos.filter((todo) => !todo.isComplete).length;
+	const completionPercentage = totalTodos > 0 ? Math.round((completedTodos / totalTodos) * 100) : 0;
+
+	let status = "Not Started";
+	if (completedTodos === 0 && totalTodos === 0) {
+		status = "Empty";
+	} else if (completedTodos === totalTodos && totalTodos > 0) {
+		status = "Completed";
+	} else if (completedTodos > 0) {
+		status = "In Progress";
+	}
+
+	return {
+		projectId: project.id,
+		projectName: project.name,
+		totalTodos,
+		completedTodos,
+		pendingTodos,
+		completionPercentage,
+		status,
+	};
+};
+
+export const getAllProjectsStats = () => {
+	return projects.map((project) => getProjectStats(project.id));
+};
