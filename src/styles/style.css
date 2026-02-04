@@ -1,0 +1,200 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+
+:root {
+	--primary-color: #e0e0e0;
+	--logo-color: #0a1a2f;
+
+	--grey-300: #bcbcbc;
+	--grey-400: #8b8b8b;
+	--grey-600: #535050;
+	--white: #ffffff;
+
+	/* ======== project color state ======== */
+	--in-progress: #5676f4;
+	--in-progress-bg: #aebeff;
+	--complete: #009a5a;
+	--complete-bg: #cbffe9;
+	--not-started: #ffffff;
+	--not-started-bg: #a9a9aa;
+
+	/* ======== utilities ======== */
+	--transition-base: all 0.2s ease-in-out;
+
+	/* ======== typography ======== */
+	--font-inter:
+		"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+		sans-serif;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body,
+html {
+	width: 100dvw;
+	min-height: 100dvh;
+
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 2fr auto;
+	margin: auto;
+
+	background: var(--primary-color);
+
+	font-family: var(--font-inter);
+}
+
+/* ================================== HEADER: mobile first ==================================  */
+.header {
+	width: 90%;
+	padding: 10px;
+	margin: 10px auto;
+
+	display: grid;
+	grid-template-columns: auto 2fr 1fr;
+	gap: 9px;
+	align-items: center;
+
+	border-radius: 20px;
+	box-shadow:
+		2px 2px 5px #bcbcbc,
+		-2px -2px 5px #ffffff;
+}
+
+.header-logo {
+	width: 36px;
+	height: 90%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	box-shadow:
+		inset 2px 2px 5px var(--grey-300),
+		inset -2px -2px 5px var(--white);
+	border-radius: 50px;
+}
+
+.logo-icon {
+	width: 100%;
+	text-align: center;
+	font-weight: 900;
+	font-size: 1.3rem;
+}
+
+.logo-text,
+.menu-title,
+.menu-btn .text {
+	display: none;
+}
+
+.header-menu {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	gap: 0.3rem;
+	align-items: center;
+	justify-content: center;
+}
+
+.menu-btn {
+	width: clamp(1.8rem, 0.3rem + 5vw, 1.8rem);
+	height: clamp(1.8rem, 0.3rem + 5vw, 1.8rem);
+	padding: 0.2rem;
+
+	border: none;
+	border-radius: 9px;
+	background: var(--primary-color);
+
+	overflow: hidden;
+	cursor: pointer;
+	transition: var(--transition-base);
+}
+
+.menu-btn:hover {
+	box-shadow:
+		2px 2px 5px var(--grey-300),
+		-2px -2px 5px var(--white);
+}
+
+.menu-btn .icon {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+
+	margin: auto;
+	align-self: center;
+}
+
+.active {
+	box-shadow:
+		2px 2px 5px var(--grey-300),
+		-2px -2px 5px var(--white);
+}
+
+.header-actions {
+	width: 100%;
+	height: 100%;
+}
+
+.btn-new-project {
+	width: 100%;
+	height: 30px;
+	border-radius: 50px;
+	padding: 0.3rem;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 1px;
+
+	font-size: 0.7rem;
+	color: var(--grey-600);
+
+	box-shadow:
+		inset 2px 2px 5px var(--grey-300),
+		inset -2px -2px 5px var(--white),
+		2px 2px 5px var(--grey-300),
+		-2px -2px 5px var(--white);
+	border: none;
+	cursor: pointer;
+	transition: var(--transition-base);
+}
+
+/* ================================== CONTENT ==================================  */
+.content {
+	width: 90%;
+	height: 90%;
+	margin: 0 auto;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+/* ================================== FOOTER ==================================  */
+.footer {
+	width: 100%;
+	padding: 0.4rem 1rem;
+}
+
+.footer-text {
+	font-size: clamp(0.8rem, 0.2rem + 2vw, 0.9rem);
+	color: var(--grey-600);
+	text-align: center;
+}
+
+.footer-link {
+	text-decoration: none;
+	color: var(--logo-color);
+	font-weight: 800;
+	transition: var(--transition-base);
+}
+
+.footer-link:hover {
+	color: var(--grey-400);
+}
