@@ -1,7 +1,9 @@
 let currentPage = "dashboard";
 
+import { renderDashboard } from "./pages/dashboard.js";
+
 const pages = {
-	dashboard: null,
+	dashboard: renderDashboard,
 	projects: null,
 	tasks: null,
 	notes: null,
@@ -51,16 +53,15 @@ const updateActiveButton = (pageName) => {
 
 const renderPage = (pageName) => {
 	const appContainer = document.querySelector("#app");
+	const renderFunction = pages[pageName];
 
-	const pageContent = {
-		dashboard: "<h1>Dashboard</h1>",
-		projects: "<h1>Projects</h1>",
-		tasks: "<h1>Tasks</h1>",
-		notes: "<h1>Notes</h1>",
-		calendar: "<h1>NOT FOUND</h1>",
-	};
+	if (renderFunction) {
+		appContainer.innerHTML = "";
+		appContainer.appendChild(renderFunction());
+	} else {
+		appContainer.innerHTML = "PAGE NOT FOUND";
+	}
 
-	appContainer.innerHTML = pageContent[pageName];
 	window.scrollTo(0, 0);
 };
 
