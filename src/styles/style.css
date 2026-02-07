@@ -11,11 +11,8 @@
 
 	/* ======== project color state ======== */
 	--in-progress: #5676f4;
-	--in-progress-bg: #aebeff;
-	--complete: #009a5a;
-	--complete-bg: #cbffe9;
-	--not-started: #ffffff;
-	--not-started-bg: #a9a9aa;
+	--completed: #009a5a;
+	--not-started: #a9a9aa;
 
 	/* ======== utilities ======== */
 	--transition-base: all 0.2s ease-in-out;
@@ -166,15 +163,325 @@ html {
 
 /* ================================== CONTENT ==================================  */
 .content {
-	width: 90%;
-	height: 90%;
-	margin: 0 auto;
+	width: 100%;
+	height: 100%;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: center;
 }
+
+/* ================================== DASHBOARD: mobile first ==================================  */
+.dashboard-page {
+	width: 96%;
+
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 80px 85px repeat(2, auto);
+	gap: 10px;
+}
+
+.dashboard-banner {
+	width: 100%;
+	max-width: 100dvw;
+	height: 100%;
+	box-shadow:
+		inset 2px 2px 5px var(--grey-300),
+		inset -2px -2px 5px var(--white);
+	border-radius: 9px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.banner-heading {
+	font-size: clamp(1.5rem, 0.2rem + 3vw, 1.8rem);
+	text-align: center;
+	break-inside: auto;
+}
+
+.dashboard-stats {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 5px;
+}
+
+.stats-card {
+	width: 100%;
+	padding: 5px;
+
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 20px 1fr;
+
+	box-shadow:
+		inset 2px 2px 5px var(--grey-300),
+		inset -2px -2px 5px var(--white);
+	border-radius: 9px;
+}
+
+.stats-heading {
+	font-size: 10px;
+	font-weight: normal;
+	text-align: center;
+	text-transform: capitalize;
+	color: var(--grey-400);
+}
+
+.stats-number {
+	margin: auto;
+	color: var(--grey-400);
+	font-weight: 600;
+}
+
+.tasks-section {
+	width: 100%;
+	padding: 10px;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+
+	box-shadow:
+		inset 2px 2px 5px var(--grey-300),
+		inset -2px -2px 5px var(--white);
+	border-radius: 9px;
+}
+
+.tasks-heading {
+	width: 100%;
+	font-size: 1.5rem;
+	color: var(--grey-300);
+}
+
+.dropdown {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+}
+
+.dropdown-btn {
+	padding: 10px 40px;
+	background: var(--primary-color);
+	color: var(--grey-300);
+
+	border: none;
+	border-radius: 9px;
+	box-shadow:
+		2px 2px 5px var(--grey-300),
+		-2px -2px 5px var(--white);
+	cursor: pointer;
+	transition: var(--transition-base);
+}
+
+.dropdown-btn:hover {
+	box-shadow:
+		inset 2px 2px 5px var(--grey-300),
+		inset -2px -2px 5px var(--white);
+	color: var(--grey-400);
+}
+
+.tasks-table {
+	width: 100%;
+
+	border-collapse: separate;
+	border-spacing: 0 10px;
+	table-layout: fixed;
+}
+
+.tasks-table thead {
+	color: var(--grey-400);
+	font-size: 12px;
+	text-align: left;
+}
+
+.tasks-table th,
+.tasks-table td {
+	padding: 9px 12px;
+	text-align: left;
+}
+
+td[colspan="3"],
+td[colspan="4"] {
+	text-align: center;
+	vertical-align: middle;
+}
+
+.empty-row {
+	width: 100%;
+	height: 100%;
+}
+
+.empty-cell {
+	width: 100%;
+	height: 100%;
+
+	text-align: center;
+	font-size: 1rem;
+	color: var(--grey-600);
+}
+
+.empty-icon {
+	font-size: 2.6rem;
+}
+
+.task-row {
+	box-shadow:
+		inset 2px 2px 5px var(--grey-300),
+		inset -2px -2px 5px var(--white),
+		2px 2px 5px var(--grey-300),
+		-2px -2px 5px var(--white);
+	border-radius: 7px;
+	height: auto;
+}
+
+.task-link {
+	width: 100%;
+	padding: 3px;
+
+	display: flex;
+	align-items: center;
+	gap: 10px;
+
+	border: none;
+	border-radius: 4px;
+	background: var(--primary-color);
+
+	font-size: 12px;
+	color: var(--grey-600);
+	cursor: pointer;
+}
+
+.task-link:hover {
+	box-shadow:
+		2px 2px 5px var(--grey-300),
+		-2px -2px 5px var(--white);
+}
+
+.task-icon {
+	background: var(--grey-600);
+	padding: 2px;
+	border-radius: 3px;
+}
+
+.task-name {
+	text-transform: capitalize;
+}
+
+.task-project,
+.task-date {
+	font-size: 12px;
+	color: var(--grey-600);
+}
+
+.projects-section {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 1rem;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+
+	box-shadow:
+		inset 2px 2px 5px var(--grey-300),
+		inset -2px -2px 5px var(--white);
+	border-radius: 9px;
+}
+
+.heading-section {
+	width: 100%;
+	font-size: 1.5rem;
+	color: var(--grey-300);
+}
+
+.projects-table {
+	width: 100%;
+
+	border-collapse: separate;
+	border-spacing: 0 10px;
+	table-layout: fixed;
+}
+
+.projects-table thead {
+	color: var(--grey-400);
+	font-size: 12px;
+	text-align: left;
+}
+
+.projects-table th,
+.projects-table td {
+	padding: 9px 7px;
+	text-align: left;
+}
+
+.project-row {
+	box-shadow:
+		inset 2px 2px 5px var(--grey-300),
+		inset -2px -2px 5px var(--white),
+		2px 2px 5px var(--grey-300),
+		-2px -2px 5px var(--white);
+	border-radius: 7px;
+	height: auto;
+}
+
+.project-link {
+	width: 100%;
+	padding: 3px;
+
+	display: flex;
+	align-items: center;
+	gap: 5px;
+
+	border: none;
+	border-radius: 4px;
+	background: var(--primary-color);
+
+	font-size: 12px;
+	color: var(--grey-600);
+	cursor: pointer;
+}
+
+.project-link:hover {
+	box-shadow:
+		2px 2px 5px var(--grey-300),
+		-2px -2px 5px var(--white);
+}
+
+.project-status,
+.project-progress,
+.project-total-tasks {
+	font-size: 12px;
+	color: var(--grey-600);
+}
+
+.project-status {
+	width: 100%;
+}
+
+/* status styles */
+.not-started {
+	color: var(--not-started);
+}
+
+.empty {
+	color: var(--not-started);
+}
+
+.completed {
+	color: var(--completed);
+}
+
+.in-progress {
+	color: var(--in-progress);
+}
+
+/* end status styles */
 
 /* ================================== FOOTER ==================================  */
 .footer {
