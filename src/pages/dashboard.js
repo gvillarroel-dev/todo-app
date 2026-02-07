@@ -3,6 +3,11 @@ import {
 	getAllProjects,
 	getProjectStats,
 } from "../modules/appLogic.js";
+import {
+	createEmptyRow,
+	createProjectRow,
+	createTaskRow,
+} from "../utils/domHelpers.js";
 
 const createFilterDropdown = (id, options) => {
 	const container = document.createElement("div");
@@ -33,30 +38,6 @@ const createFilterDropdown = (id, options) => {
 	container.appendChild(content);
 
 	return container;
-};
-
-const createEmptySection = (section) => {
-	const content = document.createElement("div");
-	content.classList.add("empty-section");
-
-	const emptyIcon = document.createElement("p");
-	emptyIcon.classList.add("empty-icon");
-
-	const heading = document.createElement("h2");
-	heading.classList.add("empty-heading");
-
-	if (section === "tasks") {
-		emptyIcon.textContent = "~(￣▽￣)~";
-		heading.textContent = "No Tasks Yet";
-	} else if (section === "projects") {
-		emptyIcon.textContent = "_(:з)∠)_";
-		heading.textContent = "Projects not found";
-	}
-
-	content.appendChild(emptyIcon);
-	content.appendChild(heading);
-
-	return content;
 };
 
 export const renderDashboard = () => {
@@ -138,62 +119,14 @@ export const renderDashboard = () => {
 
 	// empty content
 	if (totalTasks === 0) {
-		const emptyRow = document.createElement("tr");
-		emptyRow.classList.add("empty-row");
-
-		const emptyCell = document.createElement("td");
-		emptyCell.setAttribute("colspan", "3");
-		emptyCell.classList.add("empty-cell");
-
-		const emptyContent = createEmptySection("tasks");
-		emptyCell.appendChild(emptyContent);
-
-		emptyRow.appendChild(emptyCell);
+		const emptyRow = createEmptyRow(3, "tasks");
 		tbody.appendChild(emptyRow);
 	} else {
 		projects.forEach((project) => {
 			const todos = project.getAllTodos();
 
 			todos.forEach((todo) => {
-				const row = document.createElement("tr");
-				row.classList.add("task-row");
-				row.setAttribute("data-priority", todo.priority);
-				row.setAttribute("data-due-date", todo.dueDate);
-				row.setAttribute("data-project-id", project.id);
-
-				// name cell
-				const taskCell = document.createElement("td");
-				const taskButton = document.createElement("button");
-				taskButton.classList.add("task-link");
-				taskButton.setAttribute("data-task-id", todo.id);
-
-				const taskIcon = document.createElement("span");
-				taskIcon.classList.add("task-icon");
-				taskIcon.setAttribute("aria-hidden", "true");
-				taskIcon.textContent = "📝";
-
-				const taskName = document.createElement("span");
-				taskName.classList.add("task-name");
-				taskName.textContent = todo.title;
-
-				taskButton.appendChild(taskIcon);
-				taskButton.appendChild(taskName);
-				taskCell.appendChild(taskButton);
-
-				// projectName cell
-				const projectCell = document.createElement("td");
-				projectCell.classList.add("task-project");
-				projectCell.textContent = project.name;
-
-				// dueDate cell
-				const dateCell = document.createElement("td");
-				dateCell.classList.add("task-date");
-				dateCell.textContent = todo.dueDate;
-
-				row.appendChild(taskCell);
-				row.appendChild(projectCell);
-				row.appendChild(dateCell);
-
+				const row = createTaskRow(todo, project);
 				tbody.appendChild(row);
 			});
 		});
@@ -247,77 +180,11 @@ export const renderDashboard = () => {
 	const projectsTbody = document.createElement("tbody");
 
 	if (projects.length === 0) {
-		const emptyRow = document.createElement("tr");
-		emptyRow.classList.add("empty-row");
-
-		const emptyCell = document.createElement("td");
-		emptyCell.setAttribute("colspan", "4");
-		emptyCell.classList.add("empty-cell");
-
-		const emptyContent = createEmptySection("projects");
-		emptyCell.appendChild(emptyContent);
-
-		emptyRow.appendChild(emptyCell);
+		const emptyRow = createEmptyRow(4, "projects");
 		projectsTbody.appendChild(emptyRow);
 	} else {
-		projects.forEach((item) => {
-			const project = getProjectStats(item.id);
-
-			const row = document.createElement("tr");
-			row.classList.add("project-row");
-			row.setAttribute("data-status", project.status);
-			row.setAttribute("data-progress", project.completionPercentage);
-			row.setAttribute("data-project-id", item.id);
-
-			// proj Name
-			const projectCell = document.createElement("td");
-			const projectButton = document.createElement("button");
-			projectButton.classList.add("project-link");
-			projectButton.setAttribute("data-project-id", item.id);
-
-			const projectIcon = document.createElement("span");
-			projectIcon.classList.add("project-icon");
-			projectIcon.setAttribute("aria-hidden", "true");
-			projectIcon.textContent = "📁";
-
-			const projectName = document.createElement("span");
-			projectName.classList.add("project-name");
-			projectName.textContent = project.projectName;
-
-			projectButton.appendChild(projectIcon);
-			projectButton.appendChild(projectName);
-			projectCell.appendChild(projectButton);
-
-			// status cell
-			const statusCell = document.createElement("td");
-			statusCell.classList.add("project-status");
-
-			if (project.status === "Not Started") {
-				statusCell.classList.add("not-started");
-			} else if (project.status === "Empty") {
-				statusCell.classList.add("empty");
-			} else if (project.status === "Completed") {
-				statusCell.classList.add("completed");
-			} else {
-				statusCell.classList.add("in-progress");
-			}
-			statusCell.textContent = project.status;
-
-			// progress cell
-			const progressCell = document.createElement("td");
-			progressCell.classList.add("project-progress");
-			progressCell.textContent = `${project.completionPercentage}%`;
-
-			// totalTasks cell
-			const tasksCell = document.createElement("td");
-			tasksCell.classList.add("project-total-tasks");
-			tasksCell.textContent = `${project.completedTodos}/${project.totalTodos}`;
-
-			row.appendChild(projectCell);
-			row.appendChild(statusCell);
-			row.appendChild(progressCell);
-			row.appendChild(tasksCell);
-
+		projects.forEach((project) => {
+			const row = createProjectRow(project);
 			projectsTbody.appendChild(row);
 		});
 	}
