@@ -4,31 +4,45 @@ export const initDropdown = (dropdownElement) => {
 
 	if (!button || !content) return;
 
+	const openDropdown = () => {
+		content.removeAttribute("hidden");
+		content.classList.add("show");
+		button.setAttribute("aria-expanded", "true");
+	};
+
+	const closeDropdown = () => {
+		content.classList.remove("show");
+		content.setAttribute("hidden", "");
+		button.setAttribute("aria-expanded", "false");
+	};
+
 	const toggleDropdown = (event) => {
 		event.stopPropagation();
 		const isExpanded = button.getAttribute("aria-expanded") === "true";
 
-		button.setAttribute("aria-expanded", !isExpanded);
-		content.toggleAttribute("hidden");
-	};
-
-	const closeDropdown = () => {
-		button.setAttribute("aria-expanded", "false");
-		content.setAttribute("hidden", "true");
+		if (isExpanded) {
+			closeDropdown();
+		} else {
+			openDropdown();
+		}
 	};
 
 	const handleOutsideClick = (event) => {
-		if (
-			!content.hasAttribute("hidden") &&
-			!dropdownElement.contains(event.target)
-		) {
+		const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+		if (isExpanded && !dropdownElement.contains(event.target)) {
 			closeDropdown();
 		}
 	};
 
 	const handleEscape = (event) => {
-		if (event.key === "Escape" && !content.hasAttribute("hidden")) {
-			closeDropdown();
+		if (event.key === "Escape") {
+			const isExpanded = button.getAttribute("aria-expanded") === "true";
+
+			if (isExpanded) {
+				closeDropdown();
+				button.focus();
+			}
 		}
 	};
 
