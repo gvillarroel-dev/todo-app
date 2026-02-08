@@ -262,6 +262,8 @@ html {
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
+	position: relative;
+	z-index: 10;
 }
 
 .dropdown-btn {
@@ -284,6 +286,67 @@ html {
 		inset -2px -2px 5px var(--white);
 	color: var(--grey-400);
 }
+
+/* DROPDOWN GENERAL STYLES */
+.dropdown-content {
+	width: 115px;
+	padding: 4px;
+	position: absolute;
+	top: calc(100% + 10px);
+	right: 0;
+	z-index: 100;
+
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+	transition: var(--transition-base);
+
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+
+	background: var(--primary-color);
+	border-radius: 9px;
+
+	box-shadow:
+		2px 2px 5px var(--grey-300),
+		-2px -2px 5px var(--white);
+}
+
+.dropdown-content.show {
+	opacity: 1;
+	visibility: visible;
+	pointer-events: auto;
+}
+
+.dropdown-content[hidden] {
+	display: none;
+}
+
+.filter-option {
+	width: 100%;
+	padding: 0.3rem;
+
+	border: none;
+	border-radius: 7px;
+	color: var(--grey-400);
+	background: var(--primary-color);
+
+	font-size: 12px;
+	text-align: center;
+	text-transform: capitalize;
+
+	cursor: pointer;
+	transition: var(--transition-base);
+}
+
+.filter-option:hover {
+	box-shadow:
+		inset 2px 2px 5px var(--grey-300),
+		inset -2px -2px 5px var(--white);
+}
+
+/* end dropdown styles */
 
 .tasks-table {
 	width: 100%;
