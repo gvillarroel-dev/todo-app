@@ -2,8 +2,8 @@ export const filterByPriority = (items) => {
 	const priorityOrder = { high: 1, medium: 2, low: 3 };
 
 	return [...items].sort((a, b) => {
-		const priorityA = priorityOrder[a.status] || 4;
-		const priorityB = priorityOrder[b.status] || 4;
+		const priorityA = priorityOrder[a.todo.priority] || 4;
+		const priorityB = priorityOrder[b.todo.priority] || 4;
 		return priorityA - priorityB;
 	});
 };
@@ -13,7 +13,7 @@ export const filterByOverdue = (items) => {
 	today.setHours(0, 0, 0, 0);
 
 	return items.filter((item) => {
-		const dueDate = new Date(item.dueDate);
+		const dueDate = new Date(item.todo.dueDate);
 		dueDate.setHours(0, 0, 0, 0);
 
 		return today > dueDate;
@@ -25,7 +25,7 @@ export const filterByOverdueSoon = (items, daysThreshold = 3) => {
 	today.setHours(0, 0, 0, 0);
 
 	return items.filter((item) => {
-		const dueDate = new Date(item.dueDate);
+		const dueDate = new Date(item.todo.dueDate);
 		dueDate.setHours(0, 0, 0, 0);
 
 		// days diff
@@ -53,16 +53,16 @@ export const sortByStatus = (items) => {
 
 export const sortByProgress = (items, order = "desc") => {
 	return [...items].sort((a, b) => {
-		const progressA = parseFloat(a.progress) || 0;
-		const progressB = parseFloat(b.progress) || 0;
+		const progressA = parseFloat(a.completionPercentage) || 0;
+		const progressB = parseFloat(b.completionPercentage) || 0;
 		return order === "desc" ? progressB - progressA : progressA - progressB;
 	});
 };
 
 export const sortByName = (items, order = "asc") => {
 	return [...items].sort((a, b) => {
-		const nameA = a.title.toLowerCase();
-		const nameB = b.title.toLowerCase();
+		const nameA = a.projectName.toLowerCase();
+		const nameB = b.projectName.toLowerCase();
 		return order === "asc"
 			? nameA.localeCompare(nameB)
 			: nameB.localeCompare(nameA);
