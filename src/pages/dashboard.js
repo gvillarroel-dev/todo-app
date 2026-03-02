@@ -1,8 +1,4 @@
-import {
-	getGlobalStats,
-	getAllProjects,
-	getProjectStats,
-} from "../modules/appLogic.js";
+import { getGlobalStats, getAllProjects } from "../modules/appLogic.js";
 import {
 	createEmptyRow,
 	createProjectRow,
