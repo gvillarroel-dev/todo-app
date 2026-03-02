@@ -1,5 +1,6 @@
 import { getProjectStats } from "../modules/appLogic";
 
+// ======================= CREATE DINAMIC TASK ROWS =======================
 export const createTaskRow = (todo, project) => {
 	const row = document.createElement("tr");
 	row.classList.add("task-row");
@@ -43,6 +44,7 @@ export const createTaskRow = (todo, project) => {
 	return row;
 };
 
+// ======================= CREATE DINAMIC PROJECT ROWS =======================
 export const createProjectRow = (project) => {
 	const row = document.createElement("tr");
 	row.classList.add("project-row");
@@ -105,6 +107,7 @@ export const createProjectRow = (project) => {
 	return row;
 };
 
+// ======================= CREATE DINAMIC EMPTY SECTION =======================
 export const createEmptyRow = (colspan, sectionType) => {
 	const emptyRow = document.createElement("tr");
 	emptyRow.classList.add("empty-row");
@@ -132,4 +135,40 @@ export const createEmptyRow = (colspan, sectionType) => {
 	emptyRow.appendChild(emptyCell);
 
 	return emptyRow;
+};
+
+// ======================= CREATE DINAMIC PROJECT MODAL =======================
+export const createProjectModal = () => {
+	const modal = document.createElement("dialog");
+	modal.classList.add("project-modal");
+
+	const form = document.createElement("form");
+
+	const heading = document.createElement("h2");
+	heading.classList.add("project-modal__heading");
+	heading.textContent = "Add New Project";
+
+	const input = document.createElement("input");
+	input.classList.add("project-modal__input");
+	input.type = "text";
+	input.name = "projectName";
+	input.placeholder = "Project name";
+
+	const submitBtn = document.createElement("button");
+	submitBtn.classList.add("project-modal__btn--submit");
+	submitBtn.type = "submit";
+	submitBtn.textContent = "Create";
+
+	const cancelBtn = document.createElement("button");
+	cancelBtn.classList.add("project-modal__btn--cancel");
+	cancelBtn.type = "button";
+	cancelBtn.textContent = "Cancel";
+
+	form.appendChild(heading);
+	form.appendChild(input);
+	form.appendChild(submitBtn);
+	form.appendChild(cancelBtn);
+	modal.appendChild(form);
+
+	return modal;
 };
