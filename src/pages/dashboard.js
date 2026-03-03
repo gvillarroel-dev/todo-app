@@ -1,40 +1,10 @@
 import { getGlobalStats, getAllProjects } from "../modules/appLogic.js";
 import {
 	createEmptyRow,
+	createFilterDropdown,
 	createProjectRow,
 	createTaskRow,
 } from "../utils/domHelpers.js";
-
-const createFilterDropdown = (id, options) => {
-	const container = document.createElement("div");
-	container.classList.add("dropdown");
-
-	const button = document.createElement("button");
-	button.classList.add("dropdown-btn");
-	button.textContent = "Filter";
-	button.setAttribute("aria-haspopup", "true");
-	button.setAttribute("aria-expanded", "false");
-	button.setAttribute("aria-controls", id);
-
-	const content = document.createElement("div");
-	content.classList.add("dropdown-content");
-	content.setAttribute("role", "menu");
-	content.setAttribute("hidden", "");
-	content.id = id;
-
-	options.forEach((option) => {
-		const optionBtn = document.createElement("button");
-		optionBtn.classList.add("filter-option");
-		optionBtn.setAttribute("role", "menuitem");
-		optionBtn.textContent = option;
-		content.appendChild(optionBtn);
-	});
-
-	container.appendChild(button);
-	container.appendChild(content);
-
-	return container;
-};
 
 export const renderDashboard = () => {
 	const stats = getGlobalStats();
