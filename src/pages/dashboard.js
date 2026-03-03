@@ -129,6 +129,7 @@ export const renderDashboard = () => {
 		"Status",
 		"Progress",
 		"Total Tasks",
+		"Created At"
 	];
 	const projectsThead = document.createElement("thead");
 	const projectsHeaderRow = document.createElement("tr");
