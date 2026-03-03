@@ -245,6 +245,7 @@ export const getProjectStats = (projectId) => {
 		pendingTodos,
 		completionPercentage,
 		status,
+		createdAt: project.createdAt,
 	};
 };
 
