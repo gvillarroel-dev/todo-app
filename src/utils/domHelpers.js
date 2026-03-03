@@ -1,4 +1,5 @@
 import { getProjectStats } from "../modules/appLogic";
+import { formatDate } from "./dateFormatter";
 
 // ======================= CREATE DINAMIC TASK ROWS =======================
 export const createTaskRow = (todo, project) => {
@@ -99,10 +100,16 @@ export const createProjectRow = (project) => {
 	tasksCell.classList.add("project-total-tasks");
 	tasksCell.textContent = `${projectStats.completedTodos}/${projectStats.totalTodos}`;
 
+	// createdAt cell
+	const createdAtCell = document.createElement("td");
+	createdAtCell.classList.add("project-date");
+	createdAtCell.textContent = formatDate(project.createdAt);
+
 	row.appendChild(projectCell);
 	row.appendChild(statusCell);
 	row.appendChild(progressCell);
 	row.appendChild(tasksCell);
+	row.appendChild(createdAtCell);
 
 	return row;
 };
