@@ -1,10 +1,13 @@
 let currentPage = "dashboard";
 
+import { initDashboardEvents } from "./events/dashboardEvents.js";
+import { initProjectsEvents } from "./events/projectsEvents.js";
 import { renderDashboard } from "./pages/dashboard.js";
+import { renderProjects } from "./pages/projects.js";
 
 const pages = {
 	dashboard: renderDashboard,
-	projects: null,
+	projects: renderProjects,
 	tasks: null,
 	notes: null,
 };
@@ -51,6 +54,15 @@ const updateActiveButton = (pageName) => {
 	});
 };
 
+const initPageEvents = (pageName) => {
+	if (pageName === "dashboard") {
+		initDashboardEvents();
+	}
+	if (pageName === "projects") {
+		initProjectsEvents();
+	}
+};
+
 const renderPage = (pageName) => {
 	const appContainer = document.querySelector("#app");
 	const renderFunction = pages[pageName];
@@ -58,10 +70,11 @@ const renderPage = (pageName) => {
 	if (renderFunction) {
 		appContainer.innerHTML = "";
 		appContainer.appendChild(renderFunction());
+
+		initPageEvents(pageName);
 	} else {
 		appContainer.innerHTML = "PAGE NOT FOUND";
 	}
-
 	window.scrollTo(0, 0);
 };
 
