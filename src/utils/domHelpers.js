@@ -5,6 +5,7 @@ import { formatDate } from "./dateFormatter";
 export const createTaskRow = (todo, project) => {
 	const row = document.createElement("tr");
 	row.classList.add("task-row");
+	row.setAttribute("data-task-id", todo.id);
 	row.setAttribute("data-priority", todo.priority);
 	row.setAttribute("data-due-date", todo.dueDate);
 	row.setAttribute("data-project-id", project.id);
