@@ -1,5 +1,5 @@
-import { getProject, getTodo } from "../modules/appLogic.js";
-import { createTaskDetailRow } from "../utils/domHelpers.js";
+import { deleteTodo, getAllProjects, getProject, getTodo, updateTodo } from "../modules/appLogic.js";
+import { createEmptyRow, createTaskDetailRow, createTaskModal, createTaskRow } from "../utils/domHelpers.js";
 import { initTaskModalEvents } from "./modalEvents.js";
 
 export const initTasksEvents = () => {
@@ -17,6 +17,76 @@ export const initTasksEvents = () => {
 	// details-expansion
 	const tasksGroups = document.querySelector(".tasks-groups");
 	tasksGroups.addEventListener("click", (e) => {
+        
+        // task edit event
+        const editBtn = e.target.closest(".task-detail__btn--edit");
+        if (editBtn) {
+            const taskId = editBtn.dataset.taskId;
+            const projectId = editBtn.dataset.projectId;
+            const todo = getTodo(projectId, taskId);
+            
+            const modal = createTaskModal(todo, getAllProjects());
+            document.body.appendChild(modal);
+            modal.showModal();
+
+            modal.addEventListener("close", () => {
+                modal.remove();
+            });
+
+            const form = modal.querySelector(".task-modal__form");
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const newData = {
+                    title: form.querySelector("#task-name").value.trim(),
+                    description: form.querySelector("#task-description").value.trim(),
+                    priority: form.querySelector("#task-priority").value,
+                    dueDate: form.querySelector("#task-dueDate").value,
+                    notes: form.querySelector("#task-notes").value.trim(),
+                };
+                if (!newData.title) return;
+                updateTodo(projectId, taskId, newData);
+                
+                const project = getProject(projectId);
+                const group = document.querySelector(`article[data-project-id="${projectId}"]`);
+                const tbody = group.querySelector("tbody");
+                tbody.innerHTML = "";
+                project.getAllTodos().forEach((todo) => {
+                    tbody.appendChild(createTaskRow(todo, project));
+                });
+                
+                modal.close();
+            });
+
+            return;
+        };
+
+        // delete task
+        const deleteBtn = e.target.closest(".task-detail__btn--delete");
+        if (deleteBtn) {
+            const taskId = deleteBtn.dataset.taskId;
+            const projectId = deleteBtn.dataset.projectId;
+            deleteTodo(projectId, taskId);
+
+            const project = getProject(projectId);
+            const group = document.querySelector(`article[data-project-id="${projectId}"]`);
+            const tbody = group.querySelector("tbody");
+            tbody.innerHTML = "";
+
+            const remainingTodos = project.getAllTodos();
+            if (remainingTodos.length === 0) {
+                const emptyRow = createEmptyRow(3, "tasks");
+                tbody.appendChild(emptyRow);
+            } else {
+                remainingTodos.forEach((todo) => {
+                    tbody.appendChild(createTaskRow(todo, project));
+                });
+            }
+
+            return;
+        };
+
+        // task row click
 		const row = e.target.closest(".task-row");
 		if (!row) return;
 
