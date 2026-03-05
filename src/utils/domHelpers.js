@@ -211,3 +211,58 @@ export const createFilterDropdown = (id, options) => {
 
 	return container;
 };
+
+// ========================= PROJECT-GROUP =========================
+export const createProjectGroup = (project, todos) => {
+	const article = document.createElement("article");
+	article.classList.add("project-group");
+
+	const header = document.createElement("header");
+	header.classList.add("project-group__header");
+
+	const span = document.createElement("span");
+	span.textContent = "⟪";
+
+	const projectHeading = document.createElement("h2");
+	projectHeading.textContent = project.name;
+
+	header.appendChild(span);
+	header.appendChild(projectHeading);
+
+	const table = document.createElement("table");
+	table.classList.add("tasks-table");
+
+	const headers = ["Task Name", "Project Name", "Due"];
+	const thead = document.createElement("thead");
+	const headerRow = document.createElement("tr");
+
+	headers.forEach((headerCell) => {
+		const th = document.createElement("th");
+		th.textContent = headerCell;
+		th.scope = "col";
+		headerRow.appendChild(th);
+	});
+
+	thead.appendChild(headerRow);
+	table.appendChild(thead);
+
+	const tbody = document.createElement("tbody");
+	
+	// empty content
+	if (todos.length === 0) {
+		const emptyRow = createEmptyRow(3, "tasks");
+		tbody.appendChild(emptyRow);
+	} else {
+		todos.forEach((todo) => {
+			const row = createTaskRow(todo, project);
+			tbody.appendChild(row);
+		});
+	}
+
+	table.appendChild(tbody);
+
+	article.appendChild(header);
+	article.appendChild(table);
+
+	return article;
+};
