@@ -2,13 +2,15 @@ let currentPage = "dashboard";
 
 import { initDashboardEvents } from "./events/dashboardEvents.js";
 import { initProjectsEvents } from "./events/projectsEvents.js";
+import { initTasksEvents } from "./events/tasksEvents.js";
 import { renderDashboard } from "./pages/dashboard.js";
 import { renderProjects } from "./pages/projects.js";
+import { renderTasks } from "./pages/tasks.js";
 
 const pages = {
 	dashboard: renderDashboard,
 	projects: renderProjects,
-	tasks: null,
+	tasks: renderTasks,
 	notes: null,
 };
 
@@ -60,6 +62,9 @@ const initPageEvents = (pageName) => {
 	}
 	if (pageName === "projects") {
 		initProjectsEvents();
+	}
+	if (pageName === "tasks") {
+		initTasksEvents();
 	}
 };
 
