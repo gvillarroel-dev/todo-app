@@ -354,6 +354,7 @@ export const createFilterDropdown = (id, options) => {
 export const createProjectGroup = (project, todos) => {
 	const article = document.createElement("article");
 	article.classList.add("project-group");
+	article.setAttribute("data-project-id", project.id);
 
 	const header = document.createElement("header");
 	header.classList.add("project-group__header");
