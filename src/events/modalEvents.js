@@ -66,9 +66,12 @@ export const initTaskModalEvents = () => {
 		const group = document.querySelector(`article[data-project-id="${projectId}"]`);
 		if (group) {
 			const tbody = group.querySelector("tbody");
+			const emptyRow = tbody.querySelector(".empty-row");
+			if (emptyRow) {
+				tbody.removeChild(emptyRow);
+			}
+
 			const row = createTaskRow(todo, getAllProjects().find(project => project.id === projectId));
-			
-			tbody.innerHTML = "";
 			tbody.appendChild(row);
 		}
 
