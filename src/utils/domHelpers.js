@@ -188,134 +188,134 @@ export const createProjectModal = () => {
 
 // ======================= CREATE DINAMIC TASK MODAL =======================
 export const createTaskModal = (task = null, projects = []) => {
-    const modal = document.createElement("dialog");
-    modal.classList.add("task-modal");
+	const modal = document.createElement("dialog");
+	modal.classList.add("task-modal");
 
-    const form = document.createElement("form");
-    form.classList.add("task-modal__form");
+	const form = document.createElement("form");
+	form.classList.add("task-modal__form");
 
-    const heading = document.createElement("h2");
-    heading.classList.add("task-modal__heading");
-    heading.textContent = task ? "Edit Task" : "Add New Task";
+	const heading = document.createElement("h2");
+	heading.classList.add("task-modal__heading");
+	heading.textContent = task ? "Edit Task" : "Add New Task";
 
-    const nameLabel = document.createElement("label");
-    nameLabel.classList.add("task-modal__label");
-    nameLabel.setAttribute("for", "task-name");
-    nameLabel.textContent = "Task Name";
+	const nameLabel = document.createElement("label");
+	nameLabel.classList.add("task-modal__label");
+	nameLabel.setAttribute("for", "task-name");
+	nameLabel.textContent = "Task Name";
 
-    const taskName = document.createElement("input");
-    taskName.classList.add("task-modal__input");
-    taskName.id = "task-name";
-    taskName.type = "text";
-    taskName.name = "task-name";
-    taskName.placeholder = "Ej: Do something...";
-    if (task) taskName.value = task.title;
+	const taskName = document.createElement("input");
+	taskName.classList.add("task-modal__input");
+	taskName.id = "task-name";
+	taskName.type = "text";
+	taskName.name = "task-name";
+	taskName.placeholder = "Ej: Do something...";
+	if (task) taskName.value = task.title;
 
-    const descriptionLabel = document.createElement("label");
-    descriptionLabel.classList.add("task-modal__label");
-    descriptionLabel.setAttribute("for", "task-description");
-    descriptionLabel.textContent = "Description";
+	const descriptionLabel = document.createElement("label");
+	descriptionLabel.classList.add("task-modal__label");
+	descriptionLabel.setAttribute("for", "task-description");
+	descriptionLabel.textContent = "Description";
 
-    const taskDescription = document.createElement("textarea");
-    taskDescription.classList.add("task-modal__textarea");
-    taskDescription.id = "task-description";
-    taskDescription.name = "task-description";
-    taskDescription.rows = 5;
-    taskDescription.placeholder = "Write something...";
-    if (task) taskDescription.value = task.description;
+	const taskDescription = document.createElement("textarea");
+	taskDescription.classList.add("task-modal__textarea");
+	taskDescription.id = "task-description";
+	taskDescription.name = "task-description";
+	taskDescription.rows = 5;
+	taskDescription.placeholder = "Write something...";
+	if (task) taskDescription.value = task.description;
 
-    const dateLabel = document.createElement("label");
-    dateLabel.classList.add("task-modal__label");
-    dateLabel.setAttribute("for", "task-dueDate");
-    dateLabel.textContent = "Expiration Date";
+	const dateLabel = document.createElement("label");
+	dateLabel.classList.add("task-modal__label");
+	dateLabel.setAttribute("for", "task-dueDate");
+	dateLabel.textContent = "Expiration Date";
 
-    const taskDue = document.createElement("input");
-    taskDue.classList.add("task-modal__input");
-    taskDue.type = "date";
-    taskDue.id = "task-dueDate";
-    taskDue.name = "task-dueDate";
-    if (task) taskDue.value = task.dueDate;
+	const taskDue = document.createElement("input");
+	taskDue.classList.add("task-modal__input");
+	taskDue.type = "date";
+	taskDue.id = "task-dueDate";
+	taskDue.name = "task-dueDate";
+	if (task) taskDue.value = task.dueDate;
 
-    const priorityLabel = document.createElement("label");
-    priorityLabel.classList.add("task-modal__label");
-    priorityLabel.setAttribute("for", "task-priority");
-    priorityLabel.textContent = "Task Priority";
+	const priorityLabel = document.createElement("label");
+	priorityLabel.classList.add("task-modal__label");
+	priorityLabel.setAttribute("for", "task-priority");
+	priorityLabel.textContent = "Task Priority";
 
-    const taskPriority = document.createElement("select");
-    taskPriority.classList.add("task-modal__select");
-    taskPriority.id = "task-priority";
-    taskPriority.name = "task-priority";
+	const taskPriority = document.createElement("select");
+	taskPriority.classList.add("task-modal__select");
+	taskPriority.id = "task-priority";
+	taskPriority.name = "task-priority";
 
-    const priorityOptions = ["high", "medium", "low"];
-    priorityOptions.forEach((option) => {
-        const opt = document.createElement("option");
-        opt.value = option;
-        opt.textContent = option.charAt(0).toUpperCase() + option.slice(1);
-        if (task && task.priority === option) opt.selected = true;
-        taskPriority.appendChild(opt);
-    });
+	const priorityOptions = ["high", "medium", "low"];
+	priorityOptions.forEach((option) => {
+		const opt = document.createElement("option");
+		opt.value = option;
+		opt.textContent = option.charAt(0).toUpperCase() + option.slice(1);
+		if (task && task.priority === option) opt.selected = true;
+		taskPriority.appendChild(opt);
+	});
 
-    const notesLabel = document.createElement("label");
-    notesLabel.classList.add("task-modal__label");
-    notesLabel.setAttribute("for", "task-notes");
-    notesLabel.textContent = "Notes";
+	const notesLabel = document.createElement("label");
+	notesLabel.classList.add("task-modal__label");
+	notesLabel.setAttribute("for", "task-notes");
+	notesLabel.textContent = "Notes";
 
-    const taskNotes = document.createElement("textarea");
-    taskNotes.classList.add("task-modal__textarea");
-    taskNotes.id = "task-notes";
-    taskNotes.name = "task-notes";
-    taskNotes.rows = 5;
-    taskNotes.placeholder = "Something to remember?";
-    if (task) taskNotes.value = task.notes;
+	const taskNotes = document.createElement("textarea");
+	taskNotes.classList.add("task-modal__textarea");
+	taskNotes.id = "task-notes";
+	taskNotes.name = "task-notes";
+	taskNotes.rows = 5;
+	taskNotes.placeholder = "Something to remember?";
+	if (task) taskNotes.value = task.notes;
 
-    // project
-    const projectLabel = document.createElement("label");
-    projectLabel.classList.add("task-modal__label");
-    projectLabel.setAttribute("for", "task-project");
-    projectLabel.textContent = "Project";
+	// project
+	const projectLabel = document.createElement("label");
+	projectLabel.classList.add("task-modal__label");
+	projectLabel.setAttribute("for", "task-project");
+	projectLabel.textContent = "Project";
 
-    const taskProject = document.createElement("select");
-    taskProject.classList.add("task-modal__select");
-    taskProject.id = "task-project";
-    taskProject.name = "task-project";
+	const taskProject = document.createElement("select");
+	taskProject.classList.add("task-modal__select");
+	taskProject.id = "task-project";
+	taskProject.name = "task-project";
 
-    projects.forEach((project) => {
-        const opt = document.createElement("option");
-        opt.value = project.id;
-        opt.textContent = project.name;
-        if (task && task.projectId === project.id) opt.selected = true;
-        taskProject.appendChild(opt);
-    });
+	projects.forEach((project) => {
+		const opt = document.createElement("option");
+		opt.value = project.id;
+		opt.textContent = project.name;
+		if (task && task.projectId === project.id) opt.selected = true;
+		taskProject.appendChild(opt);
+	});
 
-    // btn
-    const submitBtn = document.createElement("button");
-    submitBtn.classList.add("task-modal__btn", "task-modal__btn--submit");
-    submitBtn.type = "submit";
-    submitBtn.textContent = task ? "Save Changes" : "Add Task";
+	// btn
+	const submitBtn = document.createElement("button");
+	submitBtn.classList.add("task-modal__btn", "task-modal__btn--submit");
+	submitBtn.type = "submit";
+	submitBtn.textContent = task ? "Save Changes" : "Add Task";
 
-    const cancelBtn = document.createElement("button");
-    cancelBtn.classList.add("task-modal__btn", "task-modal__btn--cancel");
-    cancelBtn.type = "button";
-    cancelBtn.textContent = "cancel";
+	const cancelBtn = document.createElement("button");
+	cancelBtn.classList.add("task-modal__btn", "task-modal__btn--cancel");
+	cancelBtn.type = "button";
+	cancelBtn.textContent = "cancel";
 
-    form.appendChild(heading);
-    form.appendChild(nameLabel);
-    form.appendChild(taskName);
-    form.appendChild(descriptionLabel);
-    form.appendChild(taskDescription);
-    form.appendChild(dateLabel);
-    form.appendChild(taskDue);
-    form.appendChild(priorityLabel);
-    form.appendChild(taskPriority);
-    form.appendChild(notesLabel);
-    form.appendChild(taskNotes);
-    form.appendChild(projectLabel);
-    form.appendChild(taskProject);
-    form.appendChild(submitBtn);
-    form.appendChild(cancelBtn);
+	form.appendChild(heading);
+	form.appendChild(nameLabel);
+	form.appendChild(taskName);
+	form.appendChild(descriptionLabel);
+	form.appendChild(taskDescription);
+	form.appendChild(dateLabel);
+	form.appendChild(taskDue);
+	form.appendChild(priorityLabel);
+	form.appendChild(taskPriority);
+	form.appendChild(notesLabel);
+	form.appendChild(taskNotes);
+	form.appendChild(projectLabel);
+	form.appendChild(taskProject);
+	form.appendChild(submitBtn);
+	form.appendChild(cancelBtn);
 
-    modal.appendChild(form);
-    return modal;
+	modal.appendChild(form);
+	return modal;
 };
 
 // ========================= DROPDOWN FILTER =========================
@@ -404,4 +404,69 @@ export const createProjectGroup = (project, todos) => {
 	article.appendChild(table);
 
 	return article;
+};
+
+// ========================= DETAIL ROW =========================
+export const createTaskDetailRow = (todo, project) => {
+	const tr = document.createElement("tr");
+	tr.classList.add("task-detail-row");
+
+	const td = document.createElement("td");
+	td.colSpan = 3;
+
+	const div = document.createElement("div");
+	div.classList.add("task-detail");
+
+	const title = document.createElement("p");
+	title.textContent = `Title: ${todo.title}`;
+
+	const description = document.createElement("p");
+	description.textContent = `Description: ${todo.description}`;
+
+	const priority = document.createElement("p");
+	priority.textContent = `Priority: ${todo.priority}`;
+
+	const dueDate = document.createElement("p");
+	dueDate.textContent = `Expiration Date: ${todo.dueDate}`;
+
+	const notes = document.createElement("p");
+	notes.textContent = `Notes: ${todo.notes}`;
+
+	const status = document.createElement("p");
+	status.textContent = `Status: ${todo.isComplete ? "Complete" : "Pending"}`;
+
+	const projectOrigin = document.createElement("p");
+	projectOrigin.textContent = `Project Name: ${project.name}`;
+
+	const taskControls = document.createElement("div");
+	taskControls.classList.add("task-details__controls");
+
+	const deleteTask = document.createElement("button");
+	deleteTask.classList.add("task-detail__btn--delete");
+	deleteTask.setAttribute("data-task-id", todo.id);
+	deleteTask.setAttribute("data-project-id", project.id);
+	deleteTask.textContent = "Delete";
+
+	const editTask = document.createElement("button");
+	editTask.classList.add("task-detail__btn--edit");
+	editTask.setAttribute("data-task-id", todo.id);
+	editTask.setAttribute("data-project-id", project.id);
+	editTask.textContent = "Edit";
+
+	taskControls.appendChild(editTask);
+	taskControls.appendChild(deleteTask);
+
+	div.appendChild(title);
+	div.appendChild(description);
+	div.appendChild(priority);
+	div.appendChild(dueDate);
+	div.appendChild(notes);
+	div.appendChild(status);
+	div.appendChild(projectOrigin);
+	div.appendChild(taskControls);
+
+	td.appendChild(div);
+	tr.appendChild(td);
+
+	return tr;
 };
