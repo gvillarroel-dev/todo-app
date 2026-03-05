@@ -454,6 +454,14 @@ export const createTaskDetailRow = (todo, project) => {
 	editTask.setAttribute("data-project-id", project.id);
 	editTask.textContent = "Edit";
 
+	const toggleComplete = document.createElement("button");
+	toggleComplete.classList.add("task-detail__btn--toggle");
+	toggleComplete.setAttribute("data-task-id", todo.id);
+	toggleComplete.setAttribute("data-project-id", project.id);
+	toggleComplete.textContent = todo.isComplete ? "Mark Incomplete" : "Mark Complete";
+	taskControls.appendChild(toggleComplete);
+
+	taskControls.appendChild(toggleComplete);
 	taskControls.appendChild(editTask);
 	taskControls.appendChild(deleteTask);
 
