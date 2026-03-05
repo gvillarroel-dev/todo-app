@@ -1,3 +1,5 @@
+import { initTaskModalEvents } from "./modalEvents";
+
 export const initTasksEvents = () => {
 	const headers = document.querySelectorAll(".project-group__header");
 	headers.forEach((header) => {
@@ -9,4 +11,6 @@ export const initTasksEvents = () => {
 			span.classList.toggle("collapsed");
 		});
 	});
+
+    initTaskModalEvents();
 };
