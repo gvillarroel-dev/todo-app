@@ -1,4 +1,4 @@
-import { deleteTodo, getAllProjects, getProject, getTodo, updateTodo } from "../modules/appLogic.js";
+import { deleteTodo, getAllProjects, getProject, getTodo, toggleTodoComplete, updateTodo } from "../modules/appLogic.js";
 import { createEmptyRow, createTaskDetailRow, createTaskModal, createTaskRow } from "../utils/domHelpers.js";
 import { initTaskModalEvents } from "./modalEvents.js";
 
@@ -85,6 +85,17 @@ export const initTasksEvents = () => {
 
             return;
         };
+
+        // complete task event
+        const toggleBtn = e.target.closest(".task-detail__btn--toggle");
+        if (toggleBtn) {
+            const taskId = toggleBtn.dataset.taskId;
+            const projectId = toggleBtn.dataset.projectId;
+            toggleTodoComplete(projectId, taskId);
+
+            const updatedTodo = getTodo(projectId, taskId);
+            toggleBtn.textContent = updatedTodo.isComplete ? "Mark Incomplete" : "Mark Complete";
+        }
 
         // task row click
 		const row = e.target.closest(".task-row");
