@@ -1,5 +1,5 @@
-import { getProjectStats } from "../modules/appLogic";
-import { formatDate } from "./dateFormatter";
+import { getProjectStats } from "../modules/appLogic.js";
+import { formatDate } from "./dateFormatter.js";
 
 // ======================= CREATE DINAMIC TASK ROWS =======================
 export const createTaskRow = (todo, project) => {
@@ -488,3 +488,29 @@ export const createTaskDetailRow = (todo, project) => {
 
 	return tr;
 };
+
+
+// ========================= NOTE CARD =========================
+export const createNoteCard = (note) => {
+	const article = document.createElement("article");
+	article.classList.add("note-card");
+
+	const p = document.createElement("p");
+	p.classList.add("note-card__content");
+	p.textContent = note.content;
+
+	const span = document.createElement("span");
+	span.classList.add("note-card__date");
+	span.textContent = formatDate(note.createdAt);
+
+	const button = document.createElement("button");
+	button.classList.add("note-card__btn--delete");
+	button.setAttribute("data-note-id", note.id);
+	button.textContent = "Delete";
+
+	article.appendChild(p);
+	article.appendChild(span);
+	article.appendChild(button);
+
+	return article;
+}
