@@ -1,5 +1,5 @@
 import { getAllNotes } from "../modules/appLogic.js";
-import { createNoteCard } from "../utils/domHelpers";
+import { createNoteCard } from "../utils/domHelpers.js";
 
 export const renderNotes = () => {
 	const notes = getAllNotes();
