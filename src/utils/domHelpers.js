@@ -140,7 +140,7 @@ export const createEmptyRow = (colspan, sectionType) => {
 	emptyIcon.classList.add("empty-icon");
 
 	if (sectionType === "tasks") {
-		emptyIcon.textContent = "~(￣▽￣)~";
+		emptyIcon.textContent = "(〃￣︶￣)人(￣︶￣〃)";
 		heading.textContent = "No Tasks Yet";
 	} else if (sectionType === "projects") {
 		emptyIcon.textContent = "_(:з)∠)_";
