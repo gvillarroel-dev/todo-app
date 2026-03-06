@@ -1,7 +1,9 @@
 import { Project } from "./project.js";
 import { Todo } from "./todo.js";
+import { Note } from "./note.js";
 
 let projects = [];
+let notes = [];
 let activeProjectId = null;
 
 // ============================= HELPERS =============================
@@ -12,6 +14,10 @@ const findProjectById = (projectId) => {
 const findProjectByIndex = (projectId) => {
 	return projects.findIndex((project) => project.id === projectId);
 };
+
+const findNoteByIndex = (noteId) => {
+	return notes.findIndex((note) => note.id === noteId);
+}
 
 // ============================= INITIALIZE APP =============================
 export const initializeApp = () => {
@@ -149,6 +155,28 @@ export const getTodo = (projectId, todoId) => {
 	return project.getTodo(todoId);
 };
 
+// ============================= NOTES MANAGER =============================
+export const getAllNotes = () => {
+	return [...notes];
+};
+
+export const createNote = (content) => {
+	const note = new Note(content);
+	notes.push(note);
+	return note;
+};
+
+export const deleteNote = (noteId) => {
+	const index = findNoteByIndex(noteId);
+	if (index === -1) {
+		console.error("Note not found");
+		return;
+	}
+
+	const deleted = notes.splice(index, 1);
+	return deleted[0];
+};
+
 // ============================= Utilities?? =============================
 export const getState = () => {
 	return {
@@ -226,7 +254,8 @@ export const getProjectStats = (projectId) => {
 	const totalTodos = todos.length;
 	const completedTodos = todos.filter((todo) => todo.isComplete).length;
 	const pendingTodos = todos.filter((todo) => !todo.isComplete).length;
-	const completionPercentage = totalTodos > 0 ? Math.round((completedTodos / totalTodos) * 100) : 0;
+	const completionPercentage =
+		totalTodos > 0 ? Math.round((completedTodos / totalTodos) * 100) : 0;
 
 	let status = "Not Started";
 	if (completedTodos === 0 && totalTodos === 0) {
