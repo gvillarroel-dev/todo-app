@@ -328,6 +328,51 @@ export const createTaskModal = (task = null, projects = []) => {
 	return modal;
 };
 
+// ========================= CREATE NOTE MODAL =========================
+export const createNoteModal = () => {
+	const dialog = document.createElement("dialog");
+	dialog.classList.add("note-modal");
+
+	const form = document.createElement("form");
+	form.classList.add("note-modal__form");
+
+	const h2 = document.createElement("h2");
+	h2.classList.add("note-modal__heading");
+	h2.textContent = "Add Note";
+
+	const contentLabel = document.createElement("label");
+	contentLabel.classList.add("note-modal__label");
+	contentLabel.setAttribute("for", "note-content");
+	contentLabel.textContent = "Note";
+
+	const textarea = document.createElement("textarea");
+	textarea.classList.add("note-modal__textarea");
+	textarea.id = "note-content";
+	textarea.name = "note-content";
+	textarea.rows = 7;
+	textarea.placeholder = "Someting to remember...?";
+
+	const submitBtn = document.createElement("button");
+	submitBtn.type = "submit";
+	submitBtn.classList.add("note-modal__btn--submit");
+	submitBtn.textContent = "Add Note";
+
+	const cancelBtn = document.createElement("button");
+	cancelBtn.type = "button";
+	cancelBtn.classList.add("note-modal__btn--cancel");
+	cancelBtn.textContent = "Cancel";
+
+	form.appendChild(contentLabel);
+	form.appendChild(textarea);
+	form.appendChild(submitBtn);
+	form.appendChild(cancelBtn);
+
+	dialog.appendChild(h2);
+	dialog.appendChild(form);
+	
+	return dialog;
+}
+
 // ========================= DROPDOWN FILTER =========================
 export const createFilterDropdown = (id, options) => {
 	const container = document.createElement("div");
@@ -514,3 +559,4 @@ export const createNoteCard = (note) => {
 
 	return article;
 }
+
