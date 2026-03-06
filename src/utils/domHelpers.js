@@ -39,9 +39,18 @@ export const createTaskRow = (todo, project) => {
 	dateCell.classList.add("task-date");
 	dateCell.textContent = todo.dueDate;
 
+	// status cell
+	const statusCell = document.createElement("td");
+	const statusSpan = document.createElement("span");
+	statusSpan.classList.add(`${todo.isComplete ? "todo-completed": "todo-pending"}`);
+	statusSpan.textContent = todo.isComplete ? "Complete" : "Pending";
+
+	statusCell.appendChild(statusSpan);
+
 	row.appendChild(taskCell);
 	row.appendChild(projectCell);
 	row.appendChild(dateCell);
+	row.appendChild(statusCell);
 
 	return row;
 };
@@ -372,7 +381,7 @@ export const createProjectGroup = (project, todos) => {
 	const table = document.createElement("table");
 	table.classList.add("tasks-table");
 
-	const headers = ["Task Name", "Project Name", "Due"];
+	const headers = ["Task Name", "Project Name", "Due", "Status"];
 	const thead = document.createElement("thead");
 	const headerRow = document.createElement("tr");
 
@@ -390,7 +399,7 @@ export const createProjectGroup = (project, todos) => {
 
 	// empty content
 	if (todos.length === 0) {
-		const emptyRow = createEmptyRow(3, "tasks");
+		const emptyRow = createEmptyRow(4, "tasks");
 		tbody.appendChild(emptyRow);
 	} else {
 		todos.forEach((todo) => {

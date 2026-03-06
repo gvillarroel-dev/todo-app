@@ -63,7 +63,7 @@ export const renderDashboard = () => {
 	const tasksContent = document.createElement("table");
 	tasksContent.classList.add("tasks-table");
 
-	const tasksHeaders = ["Task Name", "Project Name", "Due"];
+	const tasksHeaders = ["Task Name", "Project Name", "Due", "Status"];
 	const thead = document.createElement("thead");
 	const headerRow = document.createElement("tr");
 
@@ -85,7 +85,7 @@ export const renderDashboard = () => {
 
 	// empty content
 	if (totalTasks === 0) {
-		const emptyRow = createEmptyRow(3, "tasks");
+		const emptyRow = createEmptyRow(4, "tasks");
 		tbody.appendChild(emptyRow);
 	} else {
 		projects.forEach((project) => {
