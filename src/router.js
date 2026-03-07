@@ -91,6 +91,7 @@ const renderPage = (pageName) => {
 		p.classList.add("not-fount__text");
 		p.textContent = "Page not found";
 
+		appContainer.innerHTML = "";
 		appContainer.appendChild(h1);
 		appContainer.appendChild(p);
 	}
