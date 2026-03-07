@@ -21,10 +21,14 @@ const findNoteByIndex = (noteId) => {
 
 // ============================= INITIALIZE APP =============================
 export const initializeApp = () => {
+	loadFromLocalStorage();
+	
 	if (projects.length === 0) {
 		const defaultProject = new Project("Default");
 		projects.push(defaultProject);
 		activeProjectId = defaultProject.id;
+		saveToLocalStorage();
+		
 		return defaultProject;
 	}
 
