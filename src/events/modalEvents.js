@@ -1,5 +1,17 @@
-import { createProject, createTodo, getAllProjects } from "../modules/appLogic.js";
-import { createProjectModal, createProjectRow, createTaskModal, createTaskRow } from "../utils/domHelpers.js";
+import {
+	createNote,
+	createProject,
+	createTodo,
+	getAllProjects,
+} from "../modules/appLogic.js";
+import {
+	createNoteCard,
+	createNoteModal,
+	createProjectModal,
+	createProjectRow,
+	createTaskModal,
+	createTaskRow,
+} from "../utils/domHelpers.js";
 
 export const initProjectModalEvents = () => {
 	const modal = createProjectModal();
@@ -39,7 +51,6 @@ export const initTaskModalEvents = () => {
 	addTaskBtn.addEventListener("click", () => {
 		modal.showModal();
 		console.log("open");
-		
 	});
 
 	const cancelModal = modal.querySelector(".task-modal__btn--cancel");
@@ -74,6 +85,38 @@ export const initTaskModalEvents = () => {
 			const row = createTaskRow(todo, getAllProjects().find(project => project.id === projectId));
 			tbody.appendChild(row);
 		}
+
+		modal.close();
+		form.reset();
+	});
+};
+
+export const initNoteModalEvents = () => {
+	const modal = createNoteModal();
+	document.body.appendChild(modal);
+
+	const createNoteBtn = document.querySelector(".btn-add-note");
+	createNoteBtn.addEventListener("click", () => {
+		modal.showModal();
+	});
+
+	const cancelBtn = modal.querySelector(".note-modal__btn--cancel");
+	cancelBtn.addEventListener("click", () => {
+		modal.close();
+	});
+
+	const form = modal.querySelector(".note-modal__form");
+	form.addEventListener("submit", (e) => {
+		e.preventDefault();
+
+		const content = modal.querySelector("#note-content").value.trim();
+		if (!content) return;
+
+		const note = createNote(content);
+		const card = createNoteCard(note);
+
+		const container = document.querySelector(".notes-grid");
+		container.appendChild(card);
 
 		modal.close();
 		form.reset();
