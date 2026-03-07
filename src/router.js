@@ -1,9 +1,11 @@
 let currentPage = "dashboard";
 
 import { initDashboardEvents } from "./events/dashboardEvents.js";
+import { initNotesEvents } from "./events/notesEvents.js";
 import { initProjectsEvents } from "./events/projectsEvents.js";
 import { initTasksEvents } from "./events/tasksEvents.js";
 import { renderDashboard } from "./pages/dashboard.js";
+import { renderNotes } from "./pages/notes.js";
 import { renderProjects } from "./pages/projects.js";
 import { renderTasks } from "./pages/tasks.js";
 
@@ -11,7 +13,7 @@ const pages = {
 	dashboard: renderDashboard,
 	projects: renderProjects,
 	tasks: renderTasks,
-	notes: null,
+	notes: renderNotes,
 };
 
 export const initRouter = () => {
@@ -65,6 +67,9 @@ const initPageEvents = (pageName) => {
 	}
 	if (pageName === "tasks") {
 		initTasksEvents();
+	}
+	if (pageName === "notes") {
+		initNotesEvents();
 	}
 };
 
