@@ -50,8 +50,8 @@ export const createTaskRow = (todo, project) => {
 
 	row.appendChild(taskCell);
 	row.appendChild(projectCell);
-	row.appendChild(dateCell);
 	row.appendChild(statusCell);
+	row.appendChild(dateCell);
 
 	return row;
 };
