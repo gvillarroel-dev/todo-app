@@ -147,7 +147,7 @@ export const renderDashboard = () => {
 	const projectsTbody = document.createElement("tbody");
 
 	if (projects.length === 0) {
-		const emptyRow = createEmptyRow(4, "projects");
+		const emptyRow = createEmptyRow(5, "projects");
 		projectsTbody.appendChild(emptyRow);
 	} else {
 		projects.forEach((project) => {
