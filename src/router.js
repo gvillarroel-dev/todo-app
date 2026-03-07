@@ -83,7 +83,16 @@ const renderPage = (pageName) => {
 
 		initPageEvents(pageName);
 	} else {
-		appContainer.innerHTML = "PAGE NOT FOUND";
+		const h1 = document.createElement("h1");
+		h1.classList.add("not-found");
+		h1.textContent = "404";
+
+		const p = document.createElement("p");
+		p.classList.add("not-fount__text");
+		p.textContent = "Page not found";
+
+		appContainer.appendChild(h1);
+		appContainer.appendChild(p);
 	}
 	window.scrollTo(0, 0);
 };
