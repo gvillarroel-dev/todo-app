@@ -17,7 +17,7 @@ const findProjectByIndex = (projectId) => {
 
 const findNoteByIndex = (noteId) => {
 	return notes.findIndex((note) => note.id === noteId);
-}
+};
 
 // ============================= INITIALIZE APP =============================
 export const initializeApp = () => {
@@ -29,6 +29,47 @@ export const initializeApp = () => {
 	}
 
 	return projects[0];
+};
+
+// ============================= LOCAL STORAGE =============================
+export const saveToLocalStorage = () => {
+	localStorage.setItem("projects", JSON.stringify(projects));
+	localStorage.setItem("notes", JSON.stringify(notes));
+};
+
+export const loadFromLocalStorage = () => {
+	const savedProjects = localStorage.getItem("projects");
+	const savedNotes = localStorage.getItem("notes");
+
+	if (savedProjects) {
+		const parsed = JSON.parse(savedProjects);
+		parsed.forEach((p) => {
+			const project = new Project(p.name);
+			project.id = p.id;
+			project.createdAt = new Date(p.createdAt);
+			
+			p.todos.forEach((t) => {
+				const todo = new Todo(t.title, t.description, t.priority, t.dueDate, t.notes);
+				todo.id = t.id;
+				todo.createdAt = new Date(t.createdAt);
+				todo.isComplete = t.isComplete;
+				
+				project.todos.push(todo);
+			});
+
+			projects.push(project);
+		});
+	}
+
+	if (savedNotes) {
+		const parsed = JSON.parse(savedNotes);
+		parsed.forEach((n) => {
+			const note = new Note(n.content);
+			note.id = n.id;
+			note.createdAt = new Date(n.createdAt);
+			notes.push(note);
+		});
+	}
 };
 
 // ============================= PROJECT MANAGER =============================
