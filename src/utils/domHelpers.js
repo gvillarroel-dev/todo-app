@@ -37,7 +37,7 @@ export const createTaskRow = (todo, project) => {
 	// dueDate cell
 	const dateCell = document.createElement("td");
 	dateCell.classList.add("task-date");
-	dateCell.textContent = todo.dueDate;
+	dateCell.textContent = formatDate(todo.dueDate);
 
 	// status cell
 	const statusCell = document.createElement("td");
