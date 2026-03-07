@@ -63,7 +63,7 @@ export const renderDashboard = () => {
 	const tasksContent = document.createElement("table");
 	tasksContent.classList.add("tasks-table");
 
-	const tasksHeaders = ["Task Name", "Project Name", "Due", "Status"];
+	const tasksHeaders = ["Task Name", "Project Name", "Status", "Due"];
 	const thead = document.createElement("thead");
 	const headerRow = document.createElement("tr");
 
