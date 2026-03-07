@@ -41,6 +41,7 @@ export const createTaskRow = (todo, project) => {
 
 	// status cell
 	const statusCell = document.createElement("td");
+	statusCell.classList.add("task-status");
 	const statusSpan = document.createElement("span");
 	statusSpan.classList.add(`${todo.isComplete ? "todo-completed": "todo-pending"}`);
 	statusSpan.textContent = todo.isComplete ? "Complete" : "Pending";
