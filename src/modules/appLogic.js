@@ -84,6 +84,8 @@ export const createProject = (name) => {
 
 	const project = new Project(name);
 	projects.push(project);
+	saveToLocalStorage();
+
 	return project;
 };
 
@@ -102,6 +104,7 @@ export const deleteProject = (projectId) => {
 		activeProjectId = projects[newActiveIndex].id;
 	}
 
+	saveToLocalStorage();
 	const deleted = projects.splice(index, 1);
 	return deleted[0];
 };
@@ -112,16 +115,6 @@ export const getProject = (projectId) => {
 
 export const getAllProjects = () => {
 	return [...projects];
-};
-
-export const updateProject = (projectId, newData) => {
-	const project = findProjectById(projectId);
-	if (!project) {
-		throw new Error(`Project with id ${projectId} not found`);
-	}
-
-	project.editProject(newData);
-	return project;
 };
 
 // ============================= ACTIVE PROJECT MANAGER =============================
@@ -154,6 +147,8 @@ export const createTodo = (projectId, todoData) => {
 	const todo = new Todo(title, description, priority, dueDate, notes);
 
 	project.addTodo(todo);
+	saveToLocalStorage();
+
 	return todo;
 };
 
@@ -163,6 +158,7 @@ export const deleteTodo = (projectId, todoId) => {
 		throw new Error(`Project with id ${projectId} not found`);
 	}
 
+	saveToLocalStorage();
 	return project.removeTodo(todoId);
 };
 
@@ -173,6 +169,8 @@ export const updateTodo = (projectId, todoId, newData) => {
 	}
 
 	project.updateTodo(todoId, newData);
+	saveToLocalStorage();
+
 	return project.getTodo(todoId);
 };
 
@@ -188,6 +186,7 @@ export const toggleTodoComplete = (projectId, todoId) => {
 	}
 
 	todo.toggleComplete();
+	saveToLocalStorage();
 	return todo;
 };
 
@@ -208,6 +207,8 @@ export const getAllNotes = () => {
 export const createNote = (content) => {
 	const note = new Note(content);
 	notes.push(note);
+	saveToLocalStorage();
+
 	return note;
 };
 
@@ -219,6 +220,7 @@ export const deleteNote = (noteId) => {
 	}
 
 	const deleted = notes.splice(index, 1);
+	saveToLocalStorage();
 	return deleted[0];
 };
 
