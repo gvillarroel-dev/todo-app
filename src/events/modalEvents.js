@@ -116,6 +116,11 @@ export const initNoteModalEvents = () => {
 		const card = createNoteCard(note);
 
 		const container = document.querySelector(".notes-grid");
+		const emptyIcon = container.querySelector(".notes-empty__icon");
+		const emptyText = container.querySelector(".notes-empty");
+		if (emptyIcon) emptyIcon.remove();
+		if (emptyText) emptyText.remove();
+
 		container.appendChild(card);
 
 		modal.close();
