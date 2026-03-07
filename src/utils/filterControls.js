@@ -78,7 +78,7 @@ const rerenderTasksTable = (tasks) => {
     tbody.innerHTML = "";
 
     if (tasks.length === 0) {
-        const emptyRow = createEmptyRow(3, "tasks");
+        const emptyRow = createEmptyRow(4, "tasks");
         tbody.appendChild(emptyRow);
         return;
     }
