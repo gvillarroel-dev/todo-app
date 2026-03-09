@@ -184,7 +184,7 @@ export const createProjectModal = () => {
 	input.id = "project-name";
 	input.type = "text";
 	input.name = "projectName";
-	input.placeholder = "Project name";
+	input.placeholder = "Ej: My project";
 
 	const submitBtn = document.createElement("button");
 	submitBtn.classList.add("project-modal__btn--submit");
