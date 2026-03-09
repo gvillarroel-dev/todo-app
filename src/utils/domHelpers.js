@@ -19,7 +19,6 @@ export const createTaskRow = (todo, project) => {
 	const taskIcon = document.createElement("span");
 	taskIcon.classList.add("task-icon");
 	taskIcon.setAttribute("aria-hidden", "true");
-	taskIcon.textContent = "📝";
 
 	const taskName = document.createElement("span");
 	taskName.classList.add("task-name");
@@ -57,6 +56,14 @@ export const createTaskRow = (todo, project) => {
 };
 
 // ======================= CREATE DINAMIC PROJECT ROWS =======================
+const randomColorGenerator = () => {
+	const r = Math.floor(Math.random() * 255);
+	const g = Math.floor(Math.random() * 255);
+	const b = Math.floor(Math.random() * 255);
+	
+	return `rgb(${r}, ${g}, ${b})`;
+}
+
 export const createProjectRow = (project) => {
 	const row = document.createElement("tr");
 	row.classList.add("project-row");
@@ -73,7 +80,7 @@ export const createProjectRow = (project) => {
 	const projectIcon = document.createElement("span");
 	projectIcon.classList.add("project-icon");
 	projectIcon.setAttribute("aria-hidden", "true");
-	projectIcon.textContent = "📁";
+	projectIcon.style.backgroundColor = randomColorGenerator();
 
 	const projectName = document.createElement("span");
 	projectName.classList.add("project-name");
