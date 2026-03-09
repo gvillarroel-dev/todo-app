@@ -95,18 +95,20 @@ export const createProjectRow = (project) => {
 
 	// status cell
 	const statusCell = document.createElement("td");
-	statusCell.classList.add("project-status");
+	const statusSpan = document.createElement("span");
+	statusSpan.classList.add("project-status");
 
 	if (projectStats.status === "Not Started") {
-		statusCell.classList.add("not-started");
+		statusSpan.classList.add("not-started");
 	} else if (projectStats.status === "Empty") {
-		statusCell.classList.add("empty");
+		statusSpan.classList.add("empty");
 	} else if (projectStats.status === "Completed") {
-		statusCell.classList.add("completed");
+		statusSpan.classList.add("completed");
 	} else {
-		statusCell.classList.add("in-progress");
+		statusSpan.classList.add("in-progress");
 	}
-	statusCell.textContent = projectStats.status;
+	statusSpan.textContent = projectStats.status;
+	statusCell.appendChild(statusSpan);
 
 	// progress cell
 	const progressCell = document.createElement("td");
