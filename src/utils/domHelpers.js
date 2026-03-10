@@ -471,7 +471,7 @@ export const createProjectGroup = (project, todos) => {
 	return article;
 };
 
-// ========================= DETAIL ROW =========================
+// ========================= Task: DETAIL ROW =========================
 export const createTaskDetailRow = (todo, project) => {
 	const tr = document.createElement("tr");
 	tr.classList.add("task-detail-row");
@@ -543,6 +543,29 @@ export const createTaskDetailRow = (todo, project) => {
 
 	return tr;
 };
+
+// ========================= Project: DETAIL ROW =========================
+export const createProjectDetailRow = (project) => {
+	const tr = document.createElement("tr");
+	tr.classList.add("project-detail-row");
+
+	const td = document.createElement("td");
+	td.colSpan = 5;
+
+	const div = document.createElement("div");
+	div.classList.add("project-detail");
+
+	const button = document.createElement("button");
+	button.classList.add("project-detail__btn--delete");
+	button.setAttribute("data-project-id", project.id);
+	button.textContent = "Delete Project";
+
+	div.appendChild(button);
+	td.appendChild(div);
+	tr.appendChild(td);
+
+	return tr;
+}
 
 
 // ========================= NOTE CARD =========================
