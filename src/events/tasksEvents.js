@@ -75,7 +75,7 @@ export const initTasksEvents = () => {
 
             const remainingTodos = project.getAllTodos();
             if (remainingTodos.length === 0) {
-                const emptyRow = createEmptyRow(3, "tasks");
+                const emptyRow = createEmptyRow(4, "tasks");
                 tbody.appendChild(emptyRow);
             } else {
                 remainingTodos.forEach((todo) => {
