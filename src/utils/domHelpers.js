@@ -437,7 +437,7 @@ export const createProjectGroup = (project, todos) => {
 	table.classList.add("tasks-table");
 	table.setAttribute("hidden", "");
 
-	const headers = ["Task Name", "Project Name", "Due", "Status"];
+	const headers = ["Task Name", "Project Name", "Status", "Due"];
 	const thead = document.createElement("thead");
 	const headerRow = document.createElement("tr");
 
