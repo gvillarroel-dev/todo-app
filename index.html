@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="A modern task management app" />
+		<meta name="author" content="Villarroel Giuliana" />
+		<title>Tasky+ | Task Management</title>
+	<script defer src="bundle.js"></script></head>
+	<body>
+		<header class="header">
+			<div class="header-logo">
+				<span class="logo-icon">T</span>
+				<span class="logo-text">
+					Tasky<span class="highlight-logo">+</span>
+				</span>
+			</div>
+
+			<nav class="header-menu" id="main-nav">
+				<div class="menu-section">
+					<h3 class="menu-title">
+						Overview <span class="menu-title-icon">⟪</span>
+					</h3>
+					<div class="menu-items">
+						<button class="menu-btn active" data-page="dashboard">
+							<img
+								class="icon"
+								src="2de6eebc69371e7e3ae8.png"
+								alt="dashboard icon"
+							/>
+							<span class="text">Dashboard</span>
+						</button>
+						<button class="menu-btn" data-page="projects">
+							<img
+								class="icon"
+								src="cc1501618533eb1c4382.png"
+								alt="projects icon"
+							/>
+							<span class="text">Projects</span>
+						</button>
+					</div>
+				</div>
+
+				<div class="menu-section">
+					<h3 class="menu-title">
+						My Pages <span class="menu-title-icon">⟪</span>
+					</h3>
+					<div class="menu-items">
+						<button class="menu-btn" data-page="tasks">
+							<img
+								class="icon"
+								src="0bb939dafe63fb57c7f5.png"
+								alt="tasks icon"
+							/>
+							<span class="text">Tasks</span>
+						</button>
+						<button class="menu-btn" data-page="notes">
+							<img
+								class="icon"
+								src="0f0a9c633056093252fa.png"
+								alt="notes icon"
+							/>
+							<span class="text">Notes</span>
+						</button>
+						<button class="menu-btn" data-page="calendar">
+							<img
+								class="icon"
+								src="17b7cae0d9cebfe22e5f.png"
+								alt="calendar icon"
+							/>
+							<span class="text">Calendar</span>
+						</button>
+					</div>
+				</div>
+			</nav>
+
+			<button class="btn-new-project" id="btn-new-project" title="Create new project">
+				<span class="btn-new-project__plus" aria-hidden="true">+</span>
+				<span class="btn-new-project__text">New Project</span>
+				<img src="729716fc84b6841abbe7.png" class="btn-new-project__icon" width="20" alt="" aria-hidden="true"/>
+			</button>
+		</header>
+
+		<main class="content" id="app">
+			<!-- content rendered here! hehehe -->
+		</main>
+
+		<footer class="footer">
+			<p class="footer-text">
+				Coded and Designed by
+				<a
+					href="https://github.com/gvillarroel-dev"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="footer-link"
+					>Villarroel Giuliana</a
+				>
+				| A project from
+				<a
+					href="https://www.theodinproject.com"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="footer-link"
+					>The Odin Project</a
+				>
+			</p>
+		</footer>
+	</body>
+</html>
