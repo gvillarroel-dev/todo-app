@@ -19,6 +19,9 @@ export const renderNotes = () => {
 	section.classList.add("notes-grid");
 
 	if (notes.length === 0) {
+		const emptySection = document.createElement("div");
+		emptySection.classList.add("notes-empty");
+
 		const emptyIcon = document.createElement("span");
 		emptyIcon.classList.add("notes-empty__icon");
 		emptyIcon.textContent = "~(￣▽￣)~";
@@ -27,8 +30,9 @@ export const renderNotes = () => {
 		emptyText.classList.add("notes-empty");
 		emptyText.textContent = "No notes yet";
 
-		section.appendChild(emptyIcon);
-		section.appendChild(emptyText);
+		emptySection.appendChild(emptyIcon);
+		emptySection.appendChild(emptyText);
+		section.appendChild(emptySection);
 	} else {
 		notes.forEach((note) => {
 			const card = createNoteCard(note);
