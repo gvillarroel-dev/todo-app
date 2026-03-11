@@ -228,6 +228,7 @@ export const createTaskModal = (task = null, projects = []) => {
 	taskName.id = "task-name";
 	taskName.type = "text";
 	taskName.name = "task-name";
+	taskName.required = "true";
 	taskName.placeholder = "Ej: Do something...";
 	if (task) taskName.value = task.title;
 
@@ -254,6 +255,7 @@ export const createTaskModal = (task = null, projects = []) => {
 	taskDue.type = "date";
 	taskDue.id = "task-dueDate";
 	taskDue.name = "task-dueDate";
+	taskDue.required = "true";
 	if (task) taskDue.value = task.dueDate;
 
 	const priorityLabel = document.createElement("label");
@@ -265,6 +267,7 @@ export const createTaskModal = (task = null, projects = []) => {
 	taskPriority.classList.add("task-modal__select");
 	taskPriority.id = "task-priority";
 	taskPriority.name = "task-priority";
+	taskPriority.required = "true";
 
 	const priorityOptions = ["high", "medium", "low"];
 	priorityOptions.forEach((option) => {
@@ -298,6 +301,7 @@ export const createTaskModal = (task = null, projects = []) => {
 	taskProject.classList.add("task-modal__select");
 	taskProject.id = "task-project";
 	taskProject.name = "task-project";
+	taskProject.required = "true";
 
 	projects.forEach((project) => {
 		const opt = document.createElement("option");
