@@ -95,6 +95,12 @@ const renderPage = (pageName) => {
 		appContainer.appendChild(h1);
 		appContainer.appendChild(p);
 	}
+
+	const btnNewProject = document.querySelector(".btn-new-project");
+	if (btnNewProject) {
+		btnNewProject.style.display = pageName === "dashboard" || pageName === "projects" ? "flex" : "none";
+	}
+
 	window.scrollTo(0, 0);
 };
 
