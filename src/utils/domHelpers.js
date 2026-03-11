@@ -269,7 +269,7 @@ export const createTaskModal = (task = null, projects = []) => {
 	taskPriority.name = "task-priority";
 	taskPriority.required = "true";
 
-	const priorityOptions = ["high", "medium", "low"];
+	const priorityOptions = ["High", "Medium", "Low"];
 	priorityOptions.forEach((option) => {
 		const opt = document.createElement("option");
 		opt.value = option;
